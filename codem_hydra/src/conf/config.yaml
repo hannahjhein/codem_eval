@@ -1,0 +1,28 @@
+params:
+  # search radius for resampling (in m, float)
+  lo_radius: 0.15
+  hi_radius: 3.0
+  # range of rotations applied in x, y, and z (in radians, float)
+  lo_angle: -0.4
+  hi_angle: 0.4
+  # range of translations appplied in x, y, and z (in m, integer)
+  lo_trans: -100
+  hi_trans: 100
+  # number of repetitions for the transformation and evaulation loop (integer)
+  reps: 1
+
+files:
+  # name of output csv (string)
+  csv: pc-permutations_hydra.csv
+  # input complement point cloud data to be transformed (string)
+  input_comp_data: 
+  # input foundational data (string)
+  input_found_data: 
+  # prefix to apply to output data set (string)
+  output_prefix: 
+  # data type suffix to apply to output data set (string)
+  output_suffix: 
+
+paths:
+  # path on machine to input data sets (string)
+  input_data_path: 
