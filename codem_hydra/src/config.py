@@ -4,10 +4,18 @@ from dataclasses import dataclass
 class Params:
     lo_radius: float
     hi_radius: float
-    lo_angle: float
-    hi_angle: float
-    lo_trans: int
-    hi_trans: int
+    lo_angle_x: float
+    hi_angle_x: float
+    lo_angle_y: float
+    hi_angle_y: float
+    lo_angle_z: float
+    hi_angle_z: float
+    lo_trans_x: int
+    hi_trans_x: int
+    lo_trans_y: int
+    hi_trans_y: int
+    lo_trans_z: int
+    hi_trans_z: int
     reps: int
 
 @dataclass
