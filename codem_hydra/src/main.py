@@ -56,10 +56,16 @@ def main(cfg: CodemHydraConfig):
             # randomly select sampling radius based on range of values in config file
             radius = np.random.uniform(cfg.params.lo_radius, cfg.params.hi_radius)
             # randomly select rotation angles in x, y, and z based on range of values in config file
-            angles = np.random.uniform(cfg.params.lo_angle, cfg.params.hi_angle, 3)
+            roll = float(np.random.uniform(cfg.params.lo_angle_x, cfg.params.hi_angle_x, 1))
+            pitch = float(np.random.uniform(cfg.params.lo_angle_y, cfg.params.hi_angle_y, 1))
+            yaw = float(np.random.uniform(cfg.params.lo_angle_z, cfg.params.hi_angle_z, 1))
+            angles = (yaw, pitch, roll)
             # randomly select translations in x, y, and z based on range of values in config file
-            translations = np.random.uniform(cfg.params.lo_trans, cfg.params.hi_trans, 3)
-            print(f"Radius = {radius}, \nRotation (X,Y,Z) = {angles}, \nTranslation (X,Y,Z) = {translations}")
+            trans_x = float(np.random.uniform(cfg.params.lo_trans_x, cfg.params.hi_trans_x, 1))
+            trans_y = float(np.random.uniform(cfg.params.lo_trans_y, cfg.params.hi_trans_y, 1))
+            trans_z = float(np.random.uniform(cfg.params.lo_trans_z, cfg.params.hi_trans_z, 1))
+            translations = (trans_z, trans_y, trans_x)
+            print(f"Radius = {radius}, \nRotation (X,Y,Z) = {angles}, \nTranslation (Z,Y,X) = {translations}")
 
 
             ### DEFINE DATA VARIABLES ###
