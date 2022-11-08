@@ -15,7 +15,20 @@ src
 ```
 
 ## User steps
-1. Open config.yaml in the conf folder and edit the parameters as desired. These parameters include:
+1. Clone the repo:
+```
+git clone https://github.com/hannahjhein/codem-hydra
+```
+
+2. Create and activate a Conda environment containing the required dependences. From inside the `codem-hydra` directory:
+```
+conda env create --file environment.yaml
+```
+```
+conda activate codem-hydra
+```
+
+3. Open config.yaml in the conf folder and edit the parameters as desired. These parameters include:
 
 	Data transformation
 	- range of radius for resampling (in m)
@@ -30,13 +43,13 @@ src
 	- name of the input foundational data set
 	- prefix to apply to the output point clouds (e.g. location abbreviation such as MUTC)
 	- suffix to apply to the output point clouds (suggest keeping the same as the input)
-2. Run 
+4. Run 
 ```
 python main.py hydra.job.chdir=True
 ``` 
 in a conda environment with the `codem` application installed
 
-3. Open the output .csv to view the random transformations applied to each iteration and the pre- and post-registration metrics
+5. Open the output .csv to view the random transformations applied to each iteration and the pre- and post-registration metrics
 
 ## Output structure
 Given an input data set named "complement.las" with a sample radius of X meters:
