@@ -41,7 +41,7 @@ def main(cfg: CodemHydraConfig):
     perm_csv = (cfg.files.csv)
     with open (perm_csv, "w", newline="") as f:
         writer = csv.writer(f)
-        header = ['radius', 'yaw', 'pitch', 'roll', 'dx', 'dy', 'dz', 'cx', 'cy', 'cz', 'prereg_sre', 'prereg_rmse', 'postreg_sre', 'postreg_rmse']
+        header = ['radius', 'yaw', 'pitch', 'roll', 'dx', 'dy', 'dz', 'cx', 'cy', 'cz', 'prereg_sre', 'prereg_rmse', 'postreg_sre', 'postreg_rmse', 'runtime']
         writer.writerow(header)
 
         # main function
@@ -130,6 +130,9 @@ def main(cfg: CodemHydraConfig):
             # define registered output using the sample radius in the output name
             output_reg = (cfg.files.output_prefix + "{:.2f}m_registered".format(radius) + cfg.files.output_suffix)
 
+            ### START TIME ###
+            st = datetime.datetime.now()
+            
             ### CODEM PRE-PROCESSING ###
             # define the configuration as (foundation file, complement file)
             config = dataclasses.asdict(codem.CodemRunConfig(found,comp))
@@ -148,6 +151,10 @@ def main(cfg: CodemHydraConfig):
             ### CODEM APPLY REGISTRATION ###
             reg = codem.apply_registration(fnd_obj, aoi_obj, icp_reg, config)
             print(f"Applied registration = {reg}")
+            
+            ### END TIME ###
+            et = datetime.datetime.now()
+            runtime = et - st
             
             # write registered file to hydra folder
             r = pdal.Reader(reg)
@@ -186,7 +193,8 @@ def main(cfg: CodemHydraConfig):
                 translations[0], translations[1], translations[2],
                 centroid[0], centroid[1], centroid[2],
                 pre_fontana, pre_rmse,
-                post_fontana, post_rmse
+                post_fontana, post_rmse,
+                runtime    
             ]
             writer.writerow(data)
 
