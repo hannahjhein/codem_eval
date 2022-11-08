@@ -70,7 +70,7 @@ def main(cfg: CodemHydraConfig):
 
             ### DEFINE DATA VARIABLES ###
             # input data to be transformed, must be point cloud
-            input_comp_data = (cfg.paths.input_data_path + cfg.files.input_comp_data)
+            input_comp_data = (os.path.normpath(cfg.paths.input_data_path + "\\" + cfg.files.input_comp_data))
             # define name for output file after resampling with random sampling radius
             output_truth = (cfg.files.output_prefix + "{:.2f}m_truth".format(radius) + cfg.files.output_suffix)
             # define name for transformed file after resampling with random sampling radius
@@ -126,7 +126,7 @@ def main(cfg: CodemHydraConfig):
             # data set that needs to be registered
             comp = (output_perturb)
             # foundational data set, bring into workspace using data path
-            found = (cfg.paths.input_data_path + cfg.files.input_found_data)
+            found = (os.path.normpath(cfg.paths.input_data_path + "\\" + cfg.files.input_found_data))
             # define registered output using the sample radius in the output name
             output_reg = (cfg.files.output_prefix + "{:.2f}m_registered".format(radius) + cfg.files.output_suffix)
 
