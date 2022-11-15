@@ -177,6 +177,33 @@ def main(cfg: CodemHydraConfig):
             # calculate post-registration fontana score and rmse
             post_fontana, post_rmse = fontana_score(r.arrays[0], p.arrays[0])
 
+            # call dsm registration results
+            dsm_omega = dsm_reg.registration_parameters.get("omega")
+            dsm_phi = dsm_reg.registration_parameters.get("phi")
+            dsm_kappa = dsm_reg.registration_parameters.get("kappa")
+            dsm_trans_x = dsm_reg.registration_parameters.get("trans_x")
+            dsm_trans_y = dsm_reg.registration_parameters.get("trans_y")
+            dsm_trans_z = dsm_reg.registration_parameters.get("trans_z")
+            dsm_scale = dsm_reg.registration_parameters.get("scale")
+            dsm_n_pairs = dsm_reg.registration_parameters.get("n_pairs")
+            dsm_rmse_x = dsm_reg.registration_parameters.get("rmse_x")
+            dsm_rmse_y = dsm_reg.registration_parameters.get("rmse_y")
+            dsm_rmse_z = dsm_reg.registration_parameters.get("rmse_z")
+            dsm_rmse_3d = dsm_reg.registration_parameters.get("rmse_3d")
+
+            # call icp registration results
+            icp_omega = icp_reg.registration_parameters.get("omega")
+            icp_phi = icp_reg.registration_parameters.get("phi")
+            icp_kappa = icp_reg.registration_parameters.get("kappa")
+            icp_trans_x = icp_reg.registration_parameters.get("trans_x")
+            icp_trans_y = icp_reg.registration_parameters.get("trans_y")
+            icp_trans_z = icp_reg.registration_parameters.get("trans_z")
+            icp_scale = icp_reg.registration_parameters.get("scale")
+            icp_n_pairs = icp_reg.registration_parameters.get("n_pairs")
+            icp_rmse_x = icp_reg.registration_parameters.get("rmse_x")
+            icp_rmse_y = icp_reg.registration_parameters.get("rmse_y")
+            icp_rmse_z = icp_reg.registration_parameters.get("rmse_z")
+            icp_rmse_3d = icp_reg.registration_parameters.get("rmse_3d")
 
             #################
             # Write results #
@@ -194,11 +221,10 @@ def main(cfg: CodemHydraConfig):
             # write transformation and error metrics to .csv
             data = [radius,
                 rot.as_euler('zyx', degrees=True)[0], rot.as_euler('zyx', degrees=True)[1], rot.as_euler('zyx', degrees=True)[2],
-                translations[0], translations[1], translations[2],
-                centroid[0], centroid[1], centroid[2],
-                pre_fontana, pre_rmse,
-                post_fontana, post_rmse,
-                runtime    
+                translations[0], translations[1], translations[2], centroid[0], centroid[1], centroid[2],
+                pre_fontana, pre_rmse, post_fontana, post_rmse, runtime,
+                dsm_omega, dsm_phi, dsm_kappa, dsm_trans_x, dsm_trans_y, dsm_trans_z, dsm_scale, dsm_n_pairs, dsm_rmse_x, dsm_rmse_y, dsm_rmse_z, dsm_rmse_3d, 
+                icp_omega, icp_phi, icp_kappa, icp_trans_x, icp_trans_y, icp_trans_z, icp_scale, icp_n_pairs, icp_rmse_x, icp_rmse_y, icp_rmse_z, icp_rmse_3d
             ]
             writer.writerow(data)
 
