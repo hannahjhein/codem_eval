@@ -12,6 +12,7 @@ src
 ├── data # put input data here, or link to pre-existing folder using config.yaml
 ├── config.py # contains data classes built from parameters in config.yaml
 └── main.py # main source code to run
+environment.yaml # use to create environment with appropriate dependences
 ```
 
 ## User steps
@@ -43,6 +44,7 @@ conda activate codem-hydra
 	- name of the input foundational data set
 	- prefix to apply to the output point clouds (e.g. location abbreviation such as MUTC)
 	- suffix to apply to the output point clouds (suggest keeping the same as the input)
+
 4. Run 
 ```
 python main.py hydra.job.chdir=True
@@ -79,6 +81,7 @@ src
 │           └── output.csv # .csv which contains all the randomly generated transformation parameters and error metrics          
 ├── config.py
 └── main.py
+environment.yaml
 ```
 
 
