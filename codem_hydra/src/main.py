@@ -2,18 +2,19 @@
 # run: python main.py hydra.job.chdir=True
 
 # Prepare environment
-import hydra
+import codem
 import csv
+import dataclasses
+import datetime
+import hydra
 import numpy as np
 import numpy.lib.recfunctions as rfn
-import pdal
 import os
-import codem
-import dataclasses
+import pdal
 
-from scipy.spatial.transform import Rotation as R
+from config_test import CodemHydraConfig
 from hydra.core.config_store import ConfigStore
-from config import CodemHydraConfig
+from scipy.spatial.transform import Rotation as R
 
 # set printing options for float values
 np.set_printoptions(precision=6, suppress=True)
