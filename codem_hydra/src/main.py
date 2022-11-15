@@ -206,6 +206,22 @@ def main(cfg: CodemHydraConfig):
             icp_rmse_y = icp_reg.registration_parameters.get("rmse_y")
             icp_rmse_z = icp_reg.registration_parameters.get("rmse_z")
             icp_rmse_3d = icp_reg.registration_parameters.get("rmse_3d")
+            
+            # call codem config params
+            min_resolution = config.get("MIN_RESOLUTION")
+            dsm_akaze_threshold = config.get("DSM_AKAZE_THRESHOLD")
+            dsm_lowes_ratio = config.get("DSM_LOWES_RATIO")
+            dsm_ransac_max_iter = config.get("DSM_RANSAC_MAX_ITER")
+            dsm_ransac_threshold = config.get("DSM_RANSAC_THRESHOLD")
+            dsm_solve_scale = config.get("DSM_SOLVE_SCALE")
+            dsm_strong_filter = config.get("DSM_STRONG_FILTER")
+            dsm_weak_filter = config.get("DSM_WEAK_FILTER")
+            icp_angle_threshold = config.get("ICP_ANGLE_THRESHOLD")
+            icp_distance_threshold = config.get("ICP_DISTANCE_THRESHOLD")
+            icp_max_iter = config.get("ICP_MAX_ITER")
+            icp_rmse_threshold = config.get("ICP_RMSE_THRESHOLD")
+            icp_robust = config.get("ICP_ROBUST")
+            icp_solve_scale = config.get("ICP_SOLVE_SCALE")
 
             #################
             # Write results #
@@ -226,7 +242,9 @@ def main(cfg: CodemHydraConfig):
                 translations[0], translations[1], translations[2], centroid[0], centroid[1], centroid[2],
                 pre_fontana, pre_rmse, post_fontana, post_rmse, runtime,
                 dsm_omega, dsm_phi, dsm_kappa, dsm_trans_x, dsm_trans_y, dsm_trans_z, dsm_scale, dsm_n_pairs, dsm_rmse_x, dsm_rmse_y, dsm_rmse_z, dsm_rmse_3d, 
-                icp_omega, icp_phi, icp_kappa, icp_trans_x, icp_trans_y, icp_trans_z, icp_scale, icp_n_pairs, icp_rmse_x, icp_rmse_y, icp_rmse_z, icp_rmse_3d
+                icp_omega, icp_phi, icp_kappa, icp_trans_x, icp_trans_y, icp_trans_z, icp_scale, icp_n_pairs, icp_rmse_x, icp_rmse_y, icp_rmse_z, icp_rmse_3d,
+                min_resolution, dsm_akaze_threshold, dsm_lowes_ratio, dsm_ransac_max_iter, dsm_ransac_threshold, dsm_solve_scale, dsm_strong_filter, dsm_weak_filter,
+                icp_angle_threshold, icp_distance_threshold, icp_max_iter, icp_rmse_threshold, icp_robust, icp_solve_scale
             ]
             writer.writerow(data)
 
