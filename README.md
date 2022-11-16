@@ -31,25 +31,27 @@ conda activate codem-hydra
 
 3. Open config.yaml in the conf folder and edit the parameters as desired. These parameters include:
 
-	Data transformation
+	Params
 	- range of radius for resampling (in m)
 	- range of rotations to be applied to AOI point cloud in x, y, and z (in radians)
 	- range of translations to be applied to AOI point cloud in x, y, and z (in m)
 	- number of repetitions for the data transformation and evaluation loop
 
-	File management
+	Files
 	- name of the output .csv with transformation parameters and error metrics
-	- file pathway to the input data sets
 	- name of the input complement point cloud to be transformed and registered
 	- name of the input foundational data set
 	- prefix to apply to the output point clouds (e.g. location abbreviation such as MUTC)
 	- suffix to apply to the output point clouds (suggest keeping the same as the input)
+	
+	Paths
+	- file pathway to the input data sets
 
 4. Run 
 ```
 python main.py hydra.job.chdir=True
 ``` 
-in a conda environment with the `codem` application installed
+in the `codem-hydra` conda environment
 
 5. Open the output .csv to view the random transformations applied to each iteration and the pre- and post-registration metrics
 
