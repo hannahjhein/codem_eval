@@ -94,12 +94,12 @@ def main(cfg: CodemHydraConfig):
 
             ### RESAMPLE AOI ###
             # read original input file
-            p = pdal.Reader(input_comp_data).pipeline()
+            input_comp = pdal.Reader(input_comp_data).pipeline()
             # sample aoi to randomly selected radius
-            p |= pdal.Filter.sample(radius=radius)
+            input_comp |= pdal.Filter.sample(radius=radius)
             # write the sampled file to the current working directory using output_truth file name
-            p |= pdal.Writer.las(output_truth, forward="all")
-            p.execute()
+            input_comp |= pdal.Writer.las(output_truth, forward="all")
+            input_comp.execute()
             print(f"Truth file = {output_truth}")
 
 
