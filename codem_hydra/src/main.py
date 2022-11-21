@@ -15,7 +15,7 @@ import os
 import pdal
 
 from collections import namedtuple
-from config_test import CodemHydraConfig
+from config import CodemHydraConfig
 from hydra.core.config_store import ConfigStore
 from scipy.spatial.transform import Rotation as R
 
