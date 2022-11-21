@@ -164,7 +164,7 @@ def main(cfg: CodemHydraConfig):
             T = D @ C @ B @ A
 
             # read resampled truth file
-            q = pdal.Reader(output_truth).pipeline()
+            q = pdal.Reader(output_crop).pipeline()
             # apply the transformation matrix
             q |= pdal.Filter.transformation(matrix=np.array_str(T.flatten(), max_line_width=999)[1:-1])
             # write the transformed file to the current working directory using the output_perturb file name
