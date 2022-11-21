@@ -49,7 +49,9 @@ def main(cfg: CodemHydraConfig):
     perm_csv = (cfg.files.csv)
     with open (perm_csv, "w", newline="") as f:
         writer = csv.writer(f)
-        header = ['radius', 'yaw', 'pitch', 'roll', 'dx', 'dy', 'dz', 'cx', 'cy', 'cz', 
+        header = ['crop_origin_x', 'crop_origin_y', 'crop_area',
+                  'found_area', 'overlap_area', 'overlap_per', 
+                  'radius', 'yaw', 'pitch', 'roll', 'dx', 'dy', 'dz', 'cx', 'cy', 'cz', 
                   'prereg_sre', 'prereg_rmse', 'postreg_sre', 'postreg_rmse', 'runtime', 
                   'dsm_omega', 'dsm_phi', 'dsm_kappa', 'dsm_trans_x', 'dsm_trans_y', 'dsm_trans_z', 'dsm_scale', 'dsm_n_pairs', 'dsm_rmse_x', 'dsm_rsme_y', 'dsm_rmse_z', 'dsm_rmse_3d', 
                   'icp_omega', 'icp_phi', 'icp_kappa', 'icp_trans_x', 'icp_trans_y', 'icp_trans_z', 'icp_scale', 'icp_n_pairs', 'icp_rmse_x', 'icp_rmse_y', 'icp_rmse_z', 'icp_rmse_3d', 
@@ -244,8 +246,9 @@ def main(cfg: CodemHydraConfig):
                 post_fontana, post_rmse))
             
             # write transformation and error metrics to .csv
-            data = [radius,
-                rot.as_euler('zyx', degrees=True)[0], rot.as_euler('zyx', degrees=True)[1], rot.as_euler('zyx', degrees=True)[2],
+            data = [origin_x, origin_y, crop_area, 
+                found_area, overlap_area, overlap_per, 
+                radius, rot.as_euler('zyx', degrees=True)[0], rot.as_euler('zyx', degrees=True)[1], rot.as_euler('zyx', degrees=True)[2],
                 translations[0], translations[1], translations[2], centroid[0], centroid[1], centroid[2],
                 pre_fontana, pre_rmse, post_fontana, post_rmse, runtime,
                 dsm_omega, dsm_phi, dsm_kappa, dsm_trans_x, dsm_trans_y, dsm_trans_z, dsm_scale, dsm_n_pairs, dsm_rmse_x, dsm_rmse_y, dsm_rmse_z, dsm_rmse_3d, 
