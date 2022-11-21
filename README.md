@@ -1,9 +1,9 @@
 # codem-hydra
 
 ## Overview
-This repository contains script to transform an input AOI point cloud, register the point cloud to a foundational data set using `codem`, and calculate pre- and post-registration error metrics. The `hydra` package is used to organize output files and keep records of the configurations used for each run.
+This repository contains script to randomly crop and transform an input AOI point cloud, register the point cloud to a foundational data set using `codem`, and calculate pre- and post-registration error metrics. The `hydra` package is used to organize output files and keep records of the configurations used for each run.
 
-Respository structure:
+### Respository structure:
 
 ```
 src
@@ -14,6 +14,27 @@ src
 └── main.py # main source code to run
 environment.yaml # use to create environment with appropriate dependences
 ```
+
+### `main.py` outline
+1. Prepare environment
+2. Link configuration
+3. Write new .csv for output
+4. Transform data
+	- Randomly select transformation values
+	- Resample the AOI
+	- Crop the AOI
+	- Apply the transformation
+5. Registration with `codem`
+	- Pre-processing
+	- Coarse (DSM) registration
+	- Fine (ICP) registration
+	- Apply registration
+6. Calculate results
+ 	- Calculate areas
+	- Calculate pre- and post-registration RMSE and Fontana score
+	- Call `codem` registration parameters (coarse and fine registration)
+	- Call `codem` configuration parameters
+7. Write results
 
 ## User steps
 1. Clone the repo:
@@ -38,14 +59,14 @@ conda activate codem-hydra
 	- number of repetitions for the data transformation and evaluation loop
 
 	Files
-	- name of the output .csv with transformation parameters and error metrics
+	- name of the output .csv (the record of transformation parameters and error metrics)
 	- name of the input complement point cloud to be transformed and registered
 	- name of the input foundational data set
-	- prefix to apply to the output point clouds (e.g. location abbreviation such as MUTC)
-	- suffix to apply to the output point clouds (suggest keeping the same as the input)
+	- prefix to apply to the output point clouds (e.g. location abbreviation such as `MUTC`)
+	- output file suffix to apply to the output point clouds (same as the input, e.g. `.laz`)
 	
 	Paths
-	- file pathway to the input data sets
+	- file pathway to folder the input data sets
 
 4. Run 
 ```
