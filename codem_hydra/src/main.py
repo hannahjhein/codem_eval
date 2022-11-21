@@ -1,7 +1,9 @@
 # main.py #
 # run: python main.py hydra.job.chdir=True
 
-# Prepare environment
+#######################
+# Prepare environment #
+#######################
 import codem
 import csv
 import dataclasses
@@ -12,6 +14,7 @@ import numpy.lib.recfunctions as rfn
 import os
 import pdal
 
+from collections import namedtuple
 from config_test import CodemHydraConfig
 from hydra.core.config_store import ConfigStore
 from scipy.spatial.transform import Rotation as R
