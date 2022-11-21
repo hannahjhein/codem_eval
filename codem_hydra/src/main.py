@@ -88,6 +88,8 @@ def main(cfg: CodemHydraConfig):
             input_comp_data = (os.path.normpath(cfg.paths.input_data_path + "\\" + cfg.files.input_comp_data))
             # define name for output file after resampling with random sampling radius
             output_truth = (cfg.files.output_prefix + "{:.2f}m_truth".format(radius) + cfg.files.output_suffix)
+            # define name for output file after resampling and cropping
+            output_crop = (cfg.files.output_prefix + "{:.2f}m_crop".format(radius) + cfg.files.output_suffix)            
             # define name for transformed file after resampling with random sampling radius
             output_perturb = (cfg.files.output_prefix + "{:.2f}m_perturb".format(radius) + cfg.files.output_suffix)
             
