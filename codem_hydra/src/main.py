@@ -143,7 +143,7 @@ def main(cfg: CodemHydraConfig):
 
             ### APPLY TRANSFORMATION ###
             # define centroid
-            centroid = np.mean(rfn.structured_to_unstructured(p.arrays[0][['X','Y','Z']]), axis=0)
+            centroid = np.mean(rfn.structured_to_unstructured(crop.arrays[0][['X','Y','Z']]), axis=0)
 
             # generate transformation matrix
             A = np.eye(4)
@@ -221,10 +221,10 @@ def main(cfg: CodemHydraConfig):
            #####################
 
             # calculate pre-registration fontana score and rmse
-            pre_fontana, pre_rmse = fontana_score(q.arrays[0], p.arrays[0])
+            pre_fontana, pre_rmse = fontana_score(q.arrays[0], crop.arrays[0])
 
             # calculate post-registration fontana score and rmse
-            post_fontana, post_rmse = fontana_score(r.arrays[0], p.arrays[0])
+            post_fontana, post_rmse = fontana_score(r.arrays[0], crop.arrays[0])
 
             # call dsm registration results
             dsm_omega = dsm_reg.registration_parameters.get("omega")
