@@ -39,7 +39,7 @@ environment.yaml # use to create environment with appropriate dependences
 ## User steps
 1. Clone the repo:
 ```
-git clone https://github.com/hannahjhein/codem-hydra
+git clone https://github.com/hannahjhein/codem-hydra.git
 ```
 
 2. Create and activate a Conda environment containing the required dependences. From inside the `codem-hydra` directory:
