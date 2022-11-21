@@ -103,6 +103,44 @@ def main(cfg: CodemHydraConfig):
             print(f"Truth file = {output_truth}")
 
 
+            ### CROP AOI ###
+            # store max and min xy values and ranges of input complement file
+            minx = input_comp.quickinfo['readers.las']['bounds']['minx']
+            maxx = input_comp.quickinfo['readers.las']['bounds']['maxx']
+            miny = input_comp.quickinfo['readers.las']['bounds']['miny']
+            maxy = input_comp.quickinfo['readers.las']['bounds']['maxy']
+            xrange = maxx-minx
+            yrange = maxy-miny
+
+            # define side length of new bbox
+            if xrange > yrange:
+                bbox_side = np.random.randint(50, int(yrange), 1)
+                print("Y value used, bbox_side=", bbox_side)
+            else:
+                bbox_side = np.random.randint(50, int(xrange), 1)
+                print("X value used, bbox_side=", bbox_side)
+            
+            # select random coordinates for new bbox origin (note buffer of length bbox_side applied)
+            origin_x = np.random.randint(minx, (maxx-bbox_side), 1)
+            origin_y = np.random.randint(miny, (maxy-bbox_side), 1)
+            print("bbox origin = (", origin_x, origin_y, ")")
+
+            # build new bbox
+            bbox_minx = float(origin_x)
+            bbox_maxx = float(origin_x + bbox_side)
+            bbox_miny = float(origin_y)
+            bbox_maxy = float(origin_y + bbox_side)
+
+            bbox = ([bbox_minx, bbox_maxx], [bbox_miny, bbox_maxy])
+            print("bbox ((xmin, xmax), (ymin, ymax)) =", str(bbox))
+
+            # apply bbox to crop
+            crop = pdal.Reader(input_comp_data).pipeline()
+            crop |= pdal.Filter.crop(bounds = str(bbox))
+            crop |= pdal.Writer.las(output_crop, forward = "all")
+            crop.execute()
+
+
             ### APPLY TRANSFORMATION ###
             # define centroid
             centroid = np.mean(rfn.structured_to_unstructured(p.arrays[0][['X','Y','Z']]), axis=0)
