@@ -31,7 +31,9 @@ def fontana_score(Bin, Ain):
     distances = np.linalg.norm(A - B, 2, axis=1)/len(weights)
     return np.sum(distances/weights), np.sqrt(np.mean(np.linalg.norm(A - B, 2, axis=1)**2))
 
-# link configuration node
+###########################
+# Link configuration node #
+###########################
 cs = ConfigStore.instance()
 cs.store(name="codem_hydra_config", node=CodemHydraConfig)
 
@@ -41,7 +43,9 @@ def main(cfg: CodemHydraConfig):
     working_dir = os.getcwd()
     print(f"Working directory is {working_dir}")
     
-    # Write new .csv with header for 
+    #############################
+    # Write new .csv for output #
+    #############################
     perm_csv = (cfg.files.csv)
     with open (perm_csv, "w", newline="") as f:
         writer = csv.writer(f)
