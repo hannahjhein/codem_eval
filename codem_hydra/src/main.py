@@ -234,7 +234,20 @@ def main(cfg: CodemHydraConfig):
             aoi_obj.prep()
 
             ### CODEM COARSE REGISTRATION ###
-            dsm_reg = codem.coarse_registration(fnd_obj, aoi_obj, config)
+            try:
+                dsm_reg = codem.coarse_registration(fnd_obj, aoi_obj, config)
+                print("Codem coarse registration complete")
+                codem_success = "Y"
+            except RuntimeError:
+                codem_success = "N"
+                data = [codem_success, origin_x, origin_y, crop_area, found_area, overlap_area, overlap_per, 
+                radius, rot.as_euler('zyx', degrees=True)[0], rot.as_euler('zyx', degrees=True)[1], rot.as_euler('zyx', degrees=True)[2],
+                translations[0], translations[1], translations[2], centroid[0], centroid[1], centroid[2]
+                ]
+                writer.writerow(data)
+                print(f"Results for failed test written to {perm_csv}")
+                print("Codem coarse registration failed \nOnto next iteration")
+                continue
 
             ### CODEM FINE REGISTRATION ###
             icp_reg = codem.fine_registration(fnd_obj, aoi_obj, dsm_reg, config)
