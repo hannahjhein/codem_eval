@@ -24,7 +24,6 @@ class Files:
     input_comp_data: str
     input_found_data: str
     output_prefix: str
-    output_suffix: str
 
 @dataclass
 class Paths:
