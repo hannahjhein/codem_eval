@@ -34,8 +34,6 @@ files:
   input_found_data: 
   # prefix to apply to output data set (string)
   output_prefix: 
-  # data type suffix to apply to output data set (string)
-  output_suffix: 
 
 paths:
   # path on machine to input data sets (string)
