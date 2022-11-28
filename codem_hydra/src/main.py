@@ -165,12 +165,12 @@ def main(cfg: CodemHydraConfig):
             T = D @ C @ B @ A
 
             # read resampled truth file
-            q = pdal.Reader(output_crop).pipeline()
+            perturb = crop
             # apply the transformation matrix
-            q |= pdal.Filter.transformation(matrix=np.array_str(T.flatten(), max_line_width=999)[1:-1])
+            perturb |= pdal.Filter.transformation(matrix=np.array_str(T.flatten(), max_line_width=999)[1:-1])
             # write the transformed file to the current working directory using the output_perturb file name
-            q |= pdal.Writer.las(output_perturb, forward="all")
-            q.execute()
+            perturb |= pdal.Writer.las(output_perturb, forward="all")
+            perturb.execute()
             print(f"Perturbed file = {output_perturb}")
             
 
@@ -213,9 +213,9 @@ def main(cfg: CodemHydraConfig):
             runtime = et - st
             
             # write registered file to hydra folder
-            r = pdal.Reader(reg)
-            r |= pdal.Writer.las(output_reg)
-            r.execute()
+            registered = pdal.Reader(reg)
+            registered |= pdal.Writer.las(output_reg)
+            registered.execute()
             print(f"Registered file = {output_reg}")
             
 
@@ -252,10 +252,10 @@ def main(cfg: CodemHydraConfig):
             overlap_per = (overlap_area/found_area)*100
             
             # calculate pre-registration fontana score and rmse
-            pre_fontana, pre_rmse = fontana_score(q.arrays[0], crop.arrays[0])
+            pre_fontana, pre_rmse = fontana_score(perturb.arrays[0], crop.arrays[0])
 
             # calculate post-registration fontana score and rmse
-            post_fontana, post_rmse = fontana_score(r.arrays[0], crop.arrays[0])
+            post_fontana, post_rmse = fontana_score(registered.arrays[0], crop.arrays[0])
 
             # call dsm registration results
             dsm_omega = dsm_reg.registration_parameters.get("omega")
