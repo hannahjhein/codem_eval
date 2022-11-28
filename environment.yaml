@@ -1,4 +1,4 @@
-name: codem-hydra
+name: codem_eval
 channels:
     - conda-forge
     - defaults
