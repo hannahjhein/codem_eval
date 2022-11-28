@@ -1,7 +1,7 @@
-# codem-hydra
+# codem_eval
 
 ## Overview
-This repository contains script to randomly crop and transform an input AOI point cloud, register the point cloud to a foundational data set using `codem`, and calculate pre- and post-registration error metrics. The `hydra` package is used to organize output files and keep records of the configurations used for each run.
+This repository contains script to test and evaluate the efficacy of 'codem' at co-registering 3D data sets. 'codem_eval' randomly crops and transforms an input AOI point cloud, registers the point cloud to a foundational data set using `codem`, and calculates pre- and post-registration error metrics. The `hydra` package is used to organize output files and keep records of the configurations used for each run.
 
 ### Respository structure:
 
@@ -39,15 +39,15 @@ environment.yaml # use to create environment with appropriate dependences
 ## User steps
 1. Clone the repo:
 ```
-git clone https://github.com/hannahjhein/codem-hydra.git
+git clone https://github.com/hannahjhein/codem_eval.git
 ```
 
-2. Create and activate a Conda environment containing the required dependences. From inside the `codem-hydra` directory:
+2. Create and activate a Conda environment containing the required dependences. From inside the `codem_eval` directory:
 ```
 conda env create --file environment.yaml
 ```
 ```
-conda activate codem-hydra
+conda activate codem_eval
 ```
 
 3. Open config.yaml in the conf folder and edit the parameters as desired. These parameters include:
@@ -63,7 +63,6 @@ conda activate codem-hydra
 	- name of the input complement point cloud to be transformed and registered
 	- name of the input foundational data set
 	- prefix to apply to the output point clouds (e.g. location abbreviation such as `MUTC`)
-	- output file suffix to apply to the output point clouds (same as the input, e.g. `.laz`)
 	
 	Paths
 	- file pathway to folder the input data sets
@@ -72,7 +71,7 @@ conda activate codem-hydra
 ```
 python main.py hydra.job.chdir=True
 ``` 
-in the `codem-hydra` conda environment
+in the `codem_eval` conda environment
 
 5. Open the output .csv to view the random transformations applied to each iteration and the pre- and post-registration metrics
 
