@@ -178,13 +178,48 @@ def main(cfg: CodemHydraConfig):
             # Registration with CODEM #
             ###########################
 
-            ### DEFINE VARIABLES ###
+            ### DEFINE VARIABLES AND CALCULATE AREA ###
             # data set that needs to be registered
             comp = (output_perturb)
             # foundational data set, bring into workspace using data path
             found = (os.path.normpath(cfg.paths.input_data_path + "\\" + cfg.files.input_found_data))
             # define registered output using the sample radius in the output name
             output_reg = (cfg.files.output_prefix + "{:.2f}m_registered".format(radius) + cfg.files.output_suffix)
+            
+            # calculate crop area
+            crop_area = float(np.square(bbox_side))
+
+            # calculate foundation area (use gdal if tif, use pdal if pc)
+            if found.endswith('.tif'):
+                found_pipeline = pdal.Reader(found).pipeline()
+                found_minx = found_pipeline.quickinfo['readers.gdal']['bounds']['minx']
+                found_maxx = found_pipeline.quickinfo['readers.gdal']['bounds']['maxx']
+                found_miny = found_pipeline.quickinfo['readers.gdal']['bounds']['maxy']
+                found_maxy = found_pipeline.quickinfo['readers.gdal']['bounds']['miny']
+            else:
+                found_pipeline = pdal.Reader(found).pipeline()
+                found_minx = found_pipeline.quickinfo['readers.las']['bounds']['minx']
+                found_maxx = found_pipeline.quickinfo['readers.las']['bounds']['maxx']
+                found_miny = found_pipeline.quickinfo['readers.las']['bounds']['maxy']
+                found_maxy = found_pipeline.quickinfo['readers.las']['bounds']['miny']
+            found_x_side = np.abs(found_maxx - found_minx)
+            found_y_side = np.abs(found_maxy - found_miny)
+            found_area = (found_x_side*found_y_side)
+
+            # calculate area of overlap between cropped complement and foundation
+            Rectangle = namedtuple('Rectangle', 'xmin ymin xmax ymax')
+
+            rfound = Rectangle(found_minx, found_miny, found_maxx, found_maxy)
+            rcrop = Rectangle(bbox_minx, bbox_miny, bbox_maxx, bbox_maxy)
+
+            def area(a, b):  # returns None if rectangles don't intersect
+                dx = min(a.xmax, b.xmax) - max(a.xmin, b.xmin)
+                dy = min(a.ymax, b.ymax) - max(a.ymin, b.ymin)
+                if (dx>=0) and (dy>=0):
+                    return dx*dy
+
+            overlap_area = area(rfound, rcrop)
+            overlap_per = (overlap_area/found_area)*100
 
             ### START TIME ###
             st = datetime.datetime.now()
