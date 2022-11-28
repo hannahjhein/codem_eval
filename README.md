@@ -1,7 +1,7 @@
 # codem_eval
 
 ## Overview
-This repository contains script to test and evaluate the efficacy of 'codem' at co-registering 3D data sets. 'codem_eval' randomly crops and transforms an input AOI point cloud, registers the point cloud to a foundational data set using `codem`, and calculates pre- and post-registration error metrics. The `hydra` package is used to organize output files and keep records of the configurations used for each run.
+This repository contains script to test and evaluate the efficacy of `codem` at co-registering 3D data sets. `codem_eval` randomly crops and transforms an input AOI point cloud, registers the point cloud to a foundational data set using `codem`, and calculates pre- and post-registration error metrics. The `hydra` package is used to organize output files and keep records of the configurations used for each run.
 
 ### Respository structure:
 
