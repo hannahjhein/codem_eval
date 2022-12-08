@@ -65,8 +65,6 @@ def main(cfg: CodemEvalConfig):
         'icp_angle_threshold', 'icp_distance_threshold', 'icp_max_iter', 'icp_rmse_threshold', 'icp_robust', 'icp_solve_scale']
         writer.writerow(header)
         print(f"{perm_csv} created")
-        #'dsm_centroid_x', 'dsm_centroid_y', 'dsm_centroid_z', 'dsm_centroid_dx', 'dsm_centroid_dy', 'dsm_centroid_dz',
-        #'icp_centroid_x', 'icp_centroid_y', 'icp_centroid_z', 'icp_centroid_dx', 'icp_centroid_dy', 'icp_centroid_dz',
 
         # main function
         # set reps in config.yaml
@@ -521,8 +519,6 @@ def main(cfg: CodemEvalConfig):
                 ]
                 writer.writerow(data)
                 print("Results written \n#######################################")
-                #dsm_centroid[0], dsm_centroid[1], dsm_centroid[2], (input_centroid[0] - dsm_centroid[0]), (input_centroid[1] - dsm_centroid[1]), (input_centroid[2] - input_centroid[2]),
-                #icp_centroid[0], icp_centroid[1], icp_centroid[2], (input_centroid[0] - icp_centroid[0]), (input_centroid[1] - icp_centroid[1]), (input_centroid[2] - icp_centroid[2]),
             
             else:
                 # full null values for unused variables and parameters
