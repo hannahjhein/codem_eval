@@ -1,0 +1,57 @@
+options:
+  # number of repetitions for the transformation and evaulation loop (integer)
+  reps: 1
+  # option to resample the complement AOI (boolean)
+  resample_aoi: True
+  # option to randomly crop the complement AOI (boolean)
+  crop_aoi: True
+  # option to randomly transform the complement AOI (boolean)
+  transform_aoi: True
+  # option to use codem to register files (boolean)
+  register_aoi: True
+  # option to remove generated files after metrics calculated (boolean)
+  remove_files: True
+
+
+params:
+  ### search radius for resampling (in m, float), if no resampling is desired set lo and hi radius to 0.0
+  lo_radius: 0.15 # default 0.15
+  hi_radius: 1.0 # default 3.0
+  ### range of rotations applied in x, y, and z (in radians, float)
+  # Roll/Omega/X
+  lo_angle_x: -0.4 # default -0.4
+  hi_angle_x: 0.4 # default 0.4
+  # Pitch/Phi/Y
+  lo_angle_y: -0.4 # default -0.4
+  hi_angle_y: 0.4 # default 0.4
+  # Yaw/Kappa/Z
+  lo_angle_z: -0.4 # default -0.4
+  hi_angle_z: 0.4 # default 0.4
+  ### range of translations appplied in x, y, and z (in m, integer)
+  # X
+  lo_trans_x: -100 # default -100
+  hi_trans_x: 100 # default 100
+  # Y
+  lo_trans_y: -100 # default -100
+  hi_trans_y: 100 # default 100
+  # Z
+  lo_trans_z: -100 # default -100
+  hi_trans_z: 100 # default 100
+  # minimum crop side length (in m, integer)
+  min_len: 200
+
+
+files:
+  # name of output csv (string) strongly encouraged to keep default here (do not add .csv suffix and suggest ending name with _)
+  csv: codem_eval_
+  # input complement point cloud data to be transformed (string)
+  input_comp_data: MUTC-2.86cm.laz
+  # input foundational data (string)
+  input_found_data: 16_usa_muscatatuck_dsm_gpm.tif
+  # prefix to apply to output data set (string)
+  output_prefix: MUTC_
+
+
+paths:
+  # path on machine to input data sets (string)
+  input_data_path: C:\Users\HannahHein\Documents\neggs\te_reg\code\codem_hydra_test\src\data
