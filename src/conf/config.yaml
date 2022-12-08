@@ -16,7 +16,7 @@ options:
 params:
   ### search radius for resampling (in m, float), if no resampling is desired set lo and hi radius to 0.0
   lo_radius: 0.15 # default 0.15
-  hi_radius: 1.0 # default 3.0
+  hi_radius: 3.0 # default 3.0
   ### range of rotations applied in x, y, and z (in radians, float)
   # Roll/Omega/X
   lo_angle_x: -0.4 # default -0.4
@@ -38,20 +38,20 @@ params:
   lo_trans_z: -100 # default -100
   hi_trans_z: 100 # default 100
   # minimum crop side length (in m, integer)
-  min_len: 200
+  min_len: 50 # default 50
 
 
 files:
   # name of output csv (string) strongly encouraged to keep default here (do not add .csv suffix and suggest ending name with _)
   csv: codem_eval_
   # input complement point cloud data to be transformed (string)
-  input_comp_data: MUTC-2.86cm.laz
+  input_comp_data: 
   # input foundational data (string)
-  input_found_data: 16_usa_muscatatuck_dsm_gpm.tif
+  input_found_data: 
   # prefix to apply to output data set (string)
-  output_prefix: MUTC_
+  output_prefix: 
 
 
 paths:
   # path on machine to input data sets (string)
-  input_data_path: C:\Users\HannahHein\Documents\neggs\te_reg\code\codem_hydra_test\src\data
+  input_data_path: 
