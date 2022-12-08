@@ -124,7 +124,7 @@ conda activate codem_eval
 ```
 python main.py hydra.job.chdir=True
 ``` 
-in the `codem_eval` conda environment
+in from the `src` folder in the `codem_eval` conda environment
 
 5. Open the output .csv to view the random transformations applied to each iteration and the pre- and post-registration metrics
 
