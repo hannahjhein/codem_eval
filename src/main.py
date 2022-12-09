@@ -297,7 +297,11 @@ def main(cfg: CodemEvalConfig):
                             return dx*dy
 
                     overlap_area = area(rfound, rcrop)
-                    overlap_per = (overlap_area/found_area)*100
+                    if isinstance(overlap_area, float):
+                        overlap_per = (overlap_area/found_area)*100 
+                    else:
+                        overlap_area = "None"
+                        overlap_per = "None"
                     
                 else:
                     # calculate aoi area using input file bounds
