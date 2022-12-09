@@ -293,8 +293,7 @@ def main(cfg: CodemEvalConfig):
                     def area(a, b):  # returns None if rectangles don't intersect
                         dx = min(a.xmax, b.xmax) - max(a.xmin, b.xmin)
                         dy = min(a.ymax, b.ymax) - max(a.ymin, b.ymin)
-                        if (dx>=0) and (dy>=0):
-                            return dx*dy
+                        return abs(dx*dy)
 
                     overlap_area = area(rfound, rcrop)
                     if isinstance(overlap_area, float):
@@ -322,8 +321,7 @@ def main(cfg: CodemEvalConfig):
                     def area(a, b):  # returns None if rectangles don't intersect
                         dx = min(a.xmax, b.xmax) - max(a.xmin, b.xmin)
                         dy = min(a.ymax, b.ymax) - max(a.ymin, b.ymin)
-                        if (dx>=0) and (dy>=0):
-                            return dx*dy
+                        return abs(dx*dy)
 
                     overlap_area = area(rfound, raoi)
                     if isinstance(overlap_area, float):
