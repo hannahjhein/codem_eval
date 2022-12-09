@@ -124,7 +124,7 @@ conda activate codem_eval
 ```
 python main.py hydra.job.chdir=True
 ``` 
-in from the `src` folder in the `codem_eval` conda environment
+from the `src` folder in the `codem_eval` conda environment
 
 5. Open the output .csv to view the random transformations applied to each iteration and the pre- and post-registration metrics
 
@@ -156,5 +156,5 @@ codem_eval
 |   └── main.py
 └── environment.yaml
 ```
-
+If `remove_files` = False, the output files will be exported to the same hydra-generated folder as the output .csv
 
