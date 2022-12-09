@@ -109,9 +109,11 @@ conda activate codem_eval
 		- *note: date and time will be automatically applied to .csv name following the prefix designated in this field*
 	- `input_comp_data`
 		- full name of the input complement point cloud file
+		- must include file extension (.las and .laz supported)
 		- string
 	- `input_found_data`
 		- full name of the foundational point cloud or DEM to be used in registration
+		- must include file extension (.las, .laz, and .tif supported)
 		- string
 		- *note: if no registration desired (i.e.* `register_aoi` *= False), leave this field blank*
 	- `output_prefix`
