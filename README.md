@@ -46,7 +46,7 @@ git clone https://github.com/hannahjhein/codem_eval.git
 
 2. Create and activate a Conda environment containing the required dependences. From inside the `codem_eval` directory:
 ```
-conda env create --file environment.yaml
+mamba env create --file environment.yaml
 ```
 ```
 conda activate codem_eval
@@ -124,7 +124,7 @@ conda activate codem_eval
 ```
 python main.py hydra.job.chdir=True
 ``` 
-from the `src` folder in the `codem_eval` conda environment
+from the `src` folder in the `codem_eval` environment
 
 5. Open the output .csv to view the random transformations applied to each iteration and the pre- and post-registration metrics
 
