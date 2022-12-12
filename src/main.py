@@ -16,6 +16,7 @@ import pdal
 
 from collections import namedtuple
 from config import CodemEvalConfig
+from datetime import timedelta
 from hydra.core.config_store import ConfigStore
 from scipy.spatial.transform import Rotation as R
 
@@ -61,7 +62,7 @@ def main(cfg: CodemEvalConfig):
         'registered_centroid_x', 'registered_centroid_y', 'registered_centroid_z', 'registered_centroid_dx', 'registered_centroid_dy', 'registered_centroid_dz',
         'dsm_omega', 'dsm_phi', 'dsm_kappa', 'dsm_trans_x', 'dsm_trans_y', 'dsm_trans_z', 'dsm_scale', 'dsm_n_pairs', 'dsm_rmse_x', 'dsm_rsme_y', 'dsm_rmse_z', 'dsm_rmse_3d', 
         'icp_omega', 'icp_phi', 'icp_kappa', 'icp_trans_x', 'icp_trans_y', 'icp_trans_z', 'icp_scale', 'icp_n_pairs', 'icp_rmse_x', 'icp_rmse_y', 'icp_rmse_z', 'icp_rmse_3d', 
-        'min_threshold', 'dsm_akaze_threshold', 'dsm_lowes_ratio', 'dsm_ransac_max_iter', 'dsm_ransac_threshold', 'dsm_solve_scale', 'dsm_strong_filter', 'dsm_weak_filter',
+        'min_resolution', 'dsm_akaze_threshold', 'dsm_lowes_ratio', 'dsm_ransac_max_iter', 'dsm_ransac_threshold', 'dsm_solve_scale', 'dsm_strong_filter', 'dsm_weak_filter',
         'icp_angle_threshold', 'icp_distance_threshold', 'icp_max_iter', 'icp_rmse_threshold', 'icp_robust', 'icp_solve_scale']
         writer.writerow(header)
         print(f"{perm_csv} created")
@@ -231,6 +232,7 @@ def main(cfg: CodemEvalConfig):
                     # write the transformed file to the current working directory using the output_perturb file name
                     perturb |= pdal.Writer.las(output_perturb, forward="all")
                     perturb.execute()
+                    input_centroid = np.mean(rfn.structured_to_unstructured(perturb.arrays[0][['X','Y','Z']]), axis=0)
                     print(f"Transformation complete, perturbed file = {output_perturb}")
                 else:
                     perturb = pdal.Reader(output_truth).pipeline()
@@ -239,6 +241,7 @@ def main(cfg: CodemEvalConfig):
                     # write the transformed file to the current working directory using the output_perturb file name
                     perturb |= pdal.Writer.las(output_perturb, forward="all")
                     perturb.execute()
+                    input_centroid = np.mean(rfn.structured_to_unstructured(perturb.arrays[0][['X','Y','Z']]), axis=0)
                     print(f"Transformation complete, perturbed file = {output_perturb}")
             
             else:
@@ -421,7 +424,7 @@ def main(cfg: CodemEvalConfig):
 
                 ### END TIME ###
                 et = datetime.datetime.now()
-                runtime = et - st
+                runtime = timedelta.total_seconds(et - st)
                 
                 ### RECORD CENTROIDS ###
                 # DSM
